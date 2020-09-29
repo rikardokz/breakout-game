@@ -4,6 +4,7 @@ const closeBtn = document.getElementById("close-btn");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+let score = 0;
 // create ball properties
 const ball = {
   x: canvas.width / 2,
@@ -33,7 +34,29 @@ function drawBall() {
   ctx.closePath();
 }
 
-drawBall();
+// draw paddle on canvas
+function drawPaddle() {
+  ctx.beginPath();
+  ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
+  ctx.fillStyle = "#0095dd";
+  ctx.fill();
+  ctx.closePath();
+}
+
+// draw everything
+function draw() {
+  drawBall();
+  drawPaddle();
+  drawScore();
+}
+
+// draw score
+function drawScore() {
+  ctx.font = "20px Arial";
+  ctx.fillText(`Score: ${score}`, canvas.width - 100, 30);
+}
+
+draw();
 // event listeners
 rulesBtn.addEventListener("click", () => {
   rules.classList.add("show");
