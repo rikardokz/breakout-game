@@ -85,6 +85,19 @@ function drawBricks() {
   });
 }
 
+// move paddle
+function movePaddle() {
+  paddle.x += paddle.dx;
+
+  if (paddle.x + paddle.w > canvas.width) {
+    paddle.x = canvas.width - paddle.w;
+  }
+
+  if (paddle.x < 0) {
+    paddle.x = 0;
+  }
+}
+
 // draw everything
 function draw() {
   drawBall();
@@ -93,7 +106,31 @@ function draw() {
   drawBricks();
 }
 
-draw();
+// update canvas drawing and animation
+function update() {
+  movePaddle();
+
+  draw();
+
+  requestAnimationFrame(update);
+}
+
+update();
+
+// keydown event
+function keyDown(e) {
+  console.log(1);
+}
+
+// keydown event
+function keyUp(e) {
+  console.log(2);
+}
+
+// keyboard event
+document.addEventListener("keydown", keyDown);
+document.addEventListener("keyup", keyUp);
+
 // event listeners
 rulesBtn.addEventListener("click", () => {
   rules.classList.add("show");
